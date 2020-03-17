@@ -1,5 +1,6 @@
 <language>
     <language-name>xul/html</language-name>
+    <addon-name>xul/html</addon-name>
     <device-type>ajax</device-type>
     <namespace>http://www.zkoss.org/2005/zul</namespace>
     <extension>zul</extension>
