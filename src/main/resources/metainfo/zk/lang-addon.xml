@@ -6,4 +6,5 @@
     <extension>zul</extension>
     <extension>xul</extension>
     <stylesheet href="~./style.css" type="text/css"/>
+    <javascript src="~./js/customWidgets.js" />
 </language>
