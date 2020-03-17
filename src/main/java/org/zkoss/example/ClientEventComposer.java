@@ -1,4 +1,4 @@
-package org.zkoss.support.zkclienteventdemo;
+package org.zkoss.example;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;

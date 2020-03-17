@@ -51,7 +51,7 @@
 	    	wgt.$supers('doKeyDown_', arguments);
 		}
 	]]></script>
-	<vlayout apply="org.zkoss.support.zkclienteventdemo.ClientEventComposer">
+	<vlayout apply="org.zkoss.example.ClientEventComposer">
 		<hlayout id="group1" sclass="group1">
 			<label value="Using enter to focus next on server-side"/>
 			<textbox id="tb1" />
