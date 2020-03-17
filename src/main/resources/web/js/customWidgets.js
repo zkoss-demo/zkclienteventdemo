@@ -1,5 +1,5 @@
 zk.afterLoad("zul.inp", function () {
-    zul.inp.CustomEnterTextbox = zk.$extends(zul.inp.Textbox, {
+	zul.inp.CustomEnterTextbox = zk.$extends(zul.inp.Textbox, {
 		doKeyDown_: function (event) {
 			if (event.domEvent.key == "Enter" && this._next != null) {
 				zk.$(this._next).focus();
@@ -8,7 +8,7 @@ zk.afterLoad("zul.inp", function () {
 			}
 		}
 	});
-    zul.inp.CustomCtrlShiftFunctionKeyTextbox = zk.$extends(zul.inp.Textbox, {
+	zul.inp.CustomCtrlShiftFunctionKeyTextbox = zk.$extends(zul.inp.Textbox, {
 		doKeyDown_: function (event) {
 			if (event.domEvent.key == "F1" && event.domEvent.shiftKey && event.domEvent.ctrlKey) {
 				this.fire("onCustomKeyEvent", null, {
@@ -21,7 +21,7 @@ zk.afterLoad("zul.inp", function () {
 			}
 		}
 	});
-    zul.inp.CustomBankEntryFormTextbox = zk.$extends(zul.inp.Textbox, {
+	zul.inp.CustomBankEntryFormTextbox = zk.$extends(zul.inp.Textbox, {
 		doKeyDown_: function (event) {
 			if (this._next != null && (event.domEvent.key == "Enter" || (event.domEvent.key == "Tab" && !event.shiftKey))) {
 				zk.$(this._next).focus();
