@@ -1,8 +1,8 @@
 <zk xmlns:w="client">
-		<script><![CDATA[
+	<script><![CDATA[
 		function doCustomKeyDownEnter_(event, wgt, next) {
-			if(event.keyCode == 13){
-				//ENTER key == keyCode 13
+			//Enter key
+			if(event.domEvent.key == "Enter"){
 				next.focus();
 			}else{
 				//do default
@@ -10,10 +10,8 @@
 			}
 		}
 		function interceptCtrlShiftFunctionKey_(event, wgt) {
-			if(event.keyCode == 112 && event.shiftKey && event.ctrlKey){
-				//TAB key == keyCode 9
-				//shiftKey true if shift held while keyDown
-				//ctrlKey true if Ctrl held while keyDown
+			//Ctrl, shift and F1
+			if(event.domEvent.key == "F1" && event.domEvent.shiftKey && event.domEvent.ctrlKey){
 				wgt.fire("onCustomKeyEvent",null,{toServer:true});
 				event.stop();
 			}else{
@@ -23,16 +21,13 @@
 		}
 		function doBankEntryFormCheck(event, wgt, next, previous) {
 			//enter and tab keys
-			if(next != null && (event.keyCode == 13 || (event.keyCode == 9 && ! event.shiftKey))){
-				//ENTER key == keyCode 13
+			if(next != null && (event.domEvent.key == "Enter" || (event.domEvent.key == "Tab" && ! event.shiftKey))){
 				next.focus();
 				event.stop();
 				return;
 			}
 			// shift+tab keys
-			if(previous != null && event.keyCode == 9 && event.shiftKey){
-				//TAB key == keyCode 9
-				//shiftKey true if shift held while keyDown
+			if(previous != null && event.domEvent.key == "Tab" && event.domEvent.shiftKey){
 				previous.focus();
 				event.stop();
 				return;
@@ -43,7 +38,7 @@
 				return;
 			}
 			//input empty and backspace key
-			if(previous != null && wgt.$n().value.length == 0 && event.keyCode == 8){
+			if(previous != null && wgt.$n().value.length == 0 && event.domEvent.key == "Backspace"){
 				previous.focus();
 				return;
 			}

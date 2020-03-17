@@ -1,8 +1,0 @@
-<language>
-    <language-name>xul/html</language-name>
-    <device-type>ajax</device-type>
-    <namespace>http://www.zkoss.org/2005/zul</namespace>
-    <extension>zul</extension>
-    <extension>xul</extension>
-    <stylesheet href="~./style.css" type="text/css"/>
-</language>
