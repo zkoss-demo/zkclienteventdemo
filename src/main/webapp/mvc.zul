@@ -1,0 +1,91 @@
+<zk xmlns:w="client">
+		<script><![CDATA[
+		function doCustomKeyDownEnter_(event, wgt, next) {
+			if(event.keyCode == 13){
+				//ENTER key == keyCode 13
+				next.focus();
+			}else{
+				//do default
+		    	wgt.$supers('doKeyDown_', arguments);
+			}
+		}
+		function interceptCtrlShiftFunctionKey_(event, wgt) {
+			if(event.keyCode == 112 && event.shiftKey && event.ctrlKey){
+				//TAB key == keyCode 9
+				//shiftKey true if shift held while keyDown
+				//ctrlKey true if Ctrl held while keyDown
+				wgt.fire("onCustomKeyEvent",null,{toServer:true});
+				event.stop();
+			}else{
+				//do default
+				wgt.$supers('doKeyDown_', arguments);
+			}
+		}
+		function doBankEntryFormCheck(event, wgt, next, previous) {
+			//enter and tab keys
+			if(next != null && (event.keyCode == 13 || (event.keyCode == 9 && ! event.shiftKey))){
+				//ENTER key == keyCode 13
+				next.focus();
+				event.stop();
+				return;
+			}
+			// shift+tab keys
+			if(previous != null && event.keyCode == 9 && event.shiftKey){
+				//TAB key == keyCode 9
+				//shiftKey true if shift held while keyDown
+				previous.focus();
+				event.stop();
+				return;
+			}
+			//input full
+			if(next != null && wgt.$n().value.length >= wgt._maxlength){
+				next.focus();
+				return;
+			}
+			//input empty and backspace key
+			if(previous != null && wgt.$n().value.length == 0 && event.keyCode == 8){
+				previous.focus();
+				return;
+			}
+			//do default
+	    	wgt.$supers('doKeyDown_', arguments);
+		}
+	]]></script>
+	<vlayout apply="org.zkoss.support.zkclienteventdemo.ClientEventComposer">
+		<hlayout id="group1" sclass="group1">
+			<label value="Using enter to focus next on server-side"/>
+			<textbox id="tb1" />
+			<textbox id="tb2" />
+			<textbox id="tb3" />
+		</hlayout>
+		<hlayout id="group2" sclass="group2">
+			<label value="Using enter to focus next on client-side"/>
+			<textbox id="tb4"/>
+			<textbox id="tb5"/>
+			<textbox id="tb6"/>
+			<separator orient="vertical" />
+			<textbox id="tb10" value="capture ctrl+shift+F1 on client and server" width="400px" />
+		</hlayout>
+		<panel title="Bank account entry form" border="true" closable="false" minimizable="false">
+			<panelchildren>
+				<hlayout>
+					<vlayout>
+						<label value="Routing number"/>
+						<textbox id="tb7" maxlength="9" placeholder="Routing number"
+							w:doKeyDown_='function(event){doBankEntryFormCheck(event,this,$("$tb8"),null)}' />
+					</vlayout>
+					<vlayout>
+						<label value="Account number"/>
+						<textbox id="tb8"  maxlength="10" placeholder="Routing number"
+							w:doKeyDown_='function(event){doBankEntryFormCheck(event,this,$("$tb9"),$("$tb7"))}' />
+					</vlayout>
+					<vlayout>
+						<label value="Check number"/>
+						<textbox id="tb9"  maxlength="4" placeholder="Routing number"
+							w:doKeyDown_='function(event){doBankEntryFormCheck(event,this,null,$("$tb8"))}' />
+					</vlayout>
+				</hlayout>
+			</panelchildren>
+		</panel>
+	</vlayout>
+</zk>
